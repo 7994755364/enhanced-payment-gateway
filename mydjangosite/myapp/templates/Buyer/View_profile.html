@@ -1,0 +1,78 @@
+{% extends "myapp/home_temp.html" %}
+<html lang="en">
+<body>
+{% load static %}
+{% block content %}
+        <div class="cart-table-area section-padding-100">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-12 col-lg-8">
+                        <div class="checkout_details_area mt-50 clearfix">
+
+                            <div class="cart-title">
+                                <h2>Profile</h2>
+                            </div>
+
+                            <form action="{% url 'view_profile' %}" method="POST">
+                                {% csrf_token %}
+<!--                                <div>-->
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <input type="text" class="form-control" id="first_name" value="{{ prof_obj.f_name }}" placeholder="" required>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <input type="text" class="form-control" id="last_name" value="{{ prof_obj.l_name }}" placeholder="" required>
+                                    </div>
+                                    <div class="col-12 mb-3">
+                                        <input type="email" class="form-control" id="email"  placeholder="" value="{{ prof_obj.email }}">
+                                    </div>
+                                    <div class="col-12 mb-3">
+                                        <select class="w-100" id="country">
+                                        <option value="uk">United Kingdom</option>
+                                        <option value="usa">United States</option>
+                                        <option value="ger">Germany</option>
+                                        <option value="fra">France</option>
+                                        <option value="ind">India</option>
+                                        <option value="aus">Australia</option>
+                                        <option value="bra">Brazil</option>
+                                        <option value="cana">Canada</option>
+                                    </select>
+                                    </div>
+                                    <div class="col-12 mb-3">
+                                        <input type="text" class="form-control mb-3" id="address" placeholder="" value="{{ prof_obj.address }}">
+                                    </div>
+                                    <div class="col-12 mb-3">
+                                        <input type="text" class="form-control" id="city" placeholder="" value="{{ prof_obj.town }}">
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <input type="text" class="form-control" id="zipcode" placeholder="" value="{{ prof_obj.zipcode}}">
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <input type="number" class="form-control" id="phone_number" min="0" placeholder="" value="{{ prof_obj.phone }}">
+                                    </div>
+                                </div>
+
+
+                            </div>
+
+            </form>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- ##### jQuery (Necessary for All JavaScript Plugins) ##### -->
+    <script src="{% static 'myapp/js/jquery/jquery-2.2.4.min.js' %}"></script>
+    <!-- Popper js -->
+    <script src="{% static 'myapp/js/popper.min.js' %}"></script>
+    <!-- Bootstrap js -->
+    <script src="{% static 'myapp/js/bootstrap.min.js' %}"></script>
+    <!-- Plugins js -->
+    <script src="{% static 'myapp/js/plugins.js' %}"></script>
+    <!-- Active js -->
+    <script src="{% static 'myapp/js/active.js' %}"></script>
+{% endblock %}
+</body>
+
+</html>

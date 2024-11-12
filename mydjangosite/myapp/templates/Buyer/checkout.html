@@ -1,0 +1,131 @@
+{% extends "myapp/home_temp.html" %}
+
+<html lang="en">
+<body>
+{% load static %}
+{% block content %}
+        <div class="cart-table-area section-padding-100">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-12 col-lg-8">
+                        <div class="checkout_details_area mt-50 clearfix">
+
+                            <div class="cart-title">
+                                <h2>Confirm order details and pay</h2>
+                            </div>
+
+                            <form action="{% url 'process_payment' %}" method="POST">
+                                {% csrf_token %}
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <input type="text" class="form-control" id="first_name" value="{{ prof_obj.f_name }}" placeholder="" required>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <input type="text" class="form-control" id="last_name" value="{{ prof_obj.l_name }}" placeholder="" required>
+                                    </div>
+<!--                                    <div class="col-12 mb-3">-->
+<!--                                        <input type="text" class="form-control" id="company" placeholder="Company Name" value="">-->
+<!--                                    </div>-->
+                                    <div class="col-12 mb-3">
+                                        <input type="email" class="form-control" id="email"  placeholder="" value="{{ prof_obj.email }}">
+                                    </div>
+                                    <div class="col-12 mb-3">
+                                        <select class="w-100" id="country">
+                                        <option value="uk">United Kingdom</option>
+                                        <option value="usa">United States</option>
+                                        <option value="ger">Germany</option>
+                                        <option value="fra">France</option>
+                                        <option value="ind">India</option>
+                                        <option value="aus">Australia</option>
+                                        <option value="bra">Brazil</option>
+                                        <option value="cana">Canada</option>
+                                    </select>
+                                    </div>
+                                    <div class="col-12 mb-3">
+                                        <input type="text" class="form-control mb-3" id="address" placeholder="" value="{{ prof_obj.address }}">
+                                    </div>
+                                    <div class="col-12 mb-3">
+                                        <input type="text" class="form-control" id="city" placeholder="" value="{{ prof_obj.town }}">
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <input type="text" class="form-control" id="zipcode" placeholder="" value="{{ prof_obj.zipcode}}">
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <input type="number" class="form-control" id="phone_number" min="0" placeholder="" value="{{ prof_obj.phone }}">
+                                    </div>
+                                </div>
+                                <div class="cart-title">
+                                <h2>PAYMENT DETAILS </h2>
+                            </div>
+              <div class="d-flex justify-content-between align-items-center mb-3">
+                <div data-mdb-input-init class="form-outline">
+                    <label class="form-label" for="card_number">Card Number</label>
+                    <input type="text" id="card_number" name="card_number" class="form-control form-control-lg" required pattern="^\d{16}$"
+                     title="Card number should be 16 digits. Please enter without space">
+                  </div>
+                <img src="https://img.icons8.com/color/48/000000/visa.png" alt="visa" width="64px" />
+              </div>
+
+              <div class="d-flex justify-content-between align-items-center mb-4">
+                <div data-mdb-input-init class="form-outline">
+                    <label class="form-label" for="typeName">Cardholder's Name</label>
+                  <input type="text" id="typeName" class="form-control form-control-lg"  pattern="^[a-zA-Z\s]{2,50}$"
+                    placeholder="Cardholder's Name" required />
+                </div>
+              </div>
+
+              <div class="d-flex justify-content-between align-items-center pb-2">
+                <div data-mdb-input-init class="form-outline">
+                    <label class="form-label" for="expiry_date">Expiration</label>
+                  <input type="text" id="expiry_date" name="expiry_date" class="form-control form-control-lg" placeholder="MM/YY"
+                    pattern="^(0[1-9]|1[0-2])\/\d{2}$" id="exp"  required />
+
+                </div>
+                <div data-mdb-input-init class="form-outline">
+                    <label class="form-label" for="cvv">Cvv</label>
+                  <input type="password" id="cvv" name="cvv" class="form-control form-control-lg"
+                    placeholder="&#9679;&#9679;&#9679;" size="2" minlength="3" maxlength="3"  required />
+
+                </div>
+
+                <button  type="submit" data-mdb-button-init data-mdb-ripple-init class="btn btn-info btn-lg btn-rounded">
+<!--                  <i class="fas fa-arrow-right"></i>-->
+                    Pay ${{ total_price }}
+                </button>
+<!--                  <div class="cart-btn mt-100">-->
+<!--                      <a href="{% url 'process_payment' %}" class="btn amado-btn w-100">Pay ${{ total_price }}</a>-->
+<!--                  </div>-->
+              </div>
+            </form>
+                        </div>
+                    </div>
+                    <div class="col-12 col-lg-4">
+                        <div class="cart-summary">
+                            <h5>Cart Total</h5>
+                            <ul class="summary-table">
+                                <li><span>subtotal:</span> <span>${{ total_price }}</span></li>
+                                <li><span>delivery:</span> <span>Free</span></li>
+                                <li><span>total:</span> <span>${{ total_price }}</span></li>
+                            </ul>
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- ##### jQuery (Necessary for All JavaScript Plugins) ##### -->
+    <script src="{% static 'myapp/js/jquery/jquery-2.2.4.min.js' %}"></script>
+    <!-- Popper js -->
+    <script src="{% static 'myapp/js/popper.min.js' %}"></script>
+    <!-- Bootstrap js -->
+    <script src="{% static 'myapp/js/bootstrap.min.js' %}"></script>
+    <!-- Plugins js -->
+    <script src="{% static 'myapp/js/plugins.js' %}"></script>
+    <!-- Active js -->
+    <script src="{% static 'myapp/js/active.js' %}"></script>
+{% endblock %}
+</body>
+
+</html>
